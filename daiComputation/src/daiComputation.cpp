@@ -71,6 +71,57 @@ int main() {
         printf("},\n");
     }
 
+    {
+        // we should be able to derive uplinkAssociationIndex_T7P3_Y from k_forTddConfigurations_T8_2, and vis-a-vis.
+        printf("Begin testing uplinkAssociationIndex_T7P3_Y and k_forTddConfigurations_T8_2\n");
+        for(uint8_t ulDlConfig = 0; ulDlConfig < lte::consts::numTddUlDlConfigurations; ulDlConfig++) {
+            for(uint8_t sfIdx = 0; sfIdx < lte::consts::numSubframesPerRadioFrame; ++sfIdx) {
+                if (uplinkAssociationIndex_T7P3_Y.at(ulDlConfig).at(sfIdx) != 0) {
+                    // if we come here, it must be an uplink subframe!
+                    auto sfType = tddUlDlConfigurations_T4P2_2.at(ulDlConfig).second.at(size_t(sfIdx));
+                    assert(lte::enums::tddSubframeType::U == sfType);
+
+                    int tempSfIfx = int(sfIdx) - int(uplinkAssociationIndex_T7P3_Y.at(ulDlConfig).at(sfIdx));
+                    while(tempSfIfx < 0) {
+                        tempSfIfx += 10;
+                    }
+                    assert(tempSfIfx >= 0);
+                    assert(tempSfIfx < 10);
+                    const uint8_t dlSfIdx = uint8_t(tempSfIfx);
+                    sfType = tddUlDlConfigurations_T4P2_2.at(ulDlConfig).second.at(size_t(dlSfIdx));
+                    assert(lte::enums::tddSubframeType::U != sfType);
+
+                    // the value from k_forTddConfigurations_T8_2 at dlSfIdx must match!
+                    assert(uplinkAssociationIndex_T7P3_Y.at(ulDlConfig).at(sfIdx) == k_forTddConfigurations_T8_2.at(ulDlConfig).at(dlSfIdx));
+                }
+            }
+        }
+        for(uint8_t ulDlConfig = 1; ulDlConfig < lte::consts::numTddUlDlConfigurations; ulDlConfig++) {
+            for(uint8_t dlSfIdx = 0; dlSfIdx < lte::consts::numSubframesPerRadioFrame; ++dlSfIdx) {
+
+                if (k_forTddConfigurations_T8_2.at(ulDlConfig).at(dlSfIdx) != 0) {
+                    // if we come here, it must be not an uplink subframe!
+                    auto sfType = tddUlDlConfigurations_T4P2_2.at(ulDlConfig).second.at(size_t(dlSfIdx));
+                    assert(lte::enums::tddSubframeType::U != sfType);
+
+                    int tempSfIfx = int(dlSfIdx) + int(k_forTddConfigurations_T8_2.at(ulDlConfig).at(dlSfIdx));
+                    while(tempSfIfx > 10) {
+                        tempSfIfx -= 10;
+                    }
+                    assert(tempSfIfx >= 0);
+                    assert(tempSfIfx < 10);
+                    const uint8_t ulSfIdx = uint8_t(tempSfIfx);
+                    sfType = tddUlDlConfigurations_T4P2_2.at(ulDlConfig).second.at(size_t(ulSfIdx));
+                    assert(lte::enums::tddSubframeType::U == sfType);
+
+                    // the value from k_forTddConfigurations_T8_2 at dlSfIdx must match!
+                    assert(uplinkAssociationIndex_T7P3_Y.at(ulDlConfig).at(ulSfIdx) == k_forTddConfigurations_T8_2.at(ulDlConfig).at(dlSfIdx));
+                }
+            }
+        }
+        printf("End testing uplinkAssociationIndex_T7P3_Y and k_forTddConfigurations_T8_2\n");
+    }
+
 
     {
         std::time_t time = std::time(0);
