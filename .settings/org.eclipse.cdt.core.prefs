@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+environment/project/cdt.managedbuild.config.gnu.macosx.exe.debug.1318591607/LTE_3GPP_ROOT/delimiter=\:
+environment/project/cdt.managedbuild.config.gnu.macosx.exe.debug.1318591607/LTE_3GPP_ROOT/operation=append
+environment/project/cdt.managedbuild.config.gnu.macosx.exe.debug.1318591607/LTE_3GPP_ROOT/value=${ProjDirPath}/../lte-3gpp
+environment/project/cdt.managedbuild.config.gnu.macosx.exe.debug.1318591607/append=true
+environment/project/cdt.managedbuild.config.gnu.macosx.exe.debug.1318591607/appendContributed=true
+environment/project/cdt.managedbuild.config.macosx.exe.release.1420223424/LTE_3GPP_ROOT/delimiter=\:
+environment/project/cdt.managedbuild.config.macosx.exe.release.1420223424/LTE_3GPP_ROOT/operation=append
+environment/project/cdt.managedbuild.config.macosx.exe.release.1420223424/LTE_3GPP_ROOT/value=${ProjDirPath}/../lte-3gpp
+environment/project/cdt.managedbuild.config.macosx.exe.release.1420223424/append=true
+environment/project/cdt.managedbuild.config.macosx.exe.release.1420223424/appendContributed=true
