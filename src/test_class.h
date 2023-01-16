@@ -25,7 +25,8 @@
 
 class test {
 public:
-    int run();
+    test(int(*run_ptr)(void * arg)) {run = run_ptr;}
+    int (*run)(void * arg);
 };
 
 
