@@ -16,13 +16,18 @@ int zcLogical2Physical_run(void* arg);
 int phichTimingTest_run(void* arg);
 int modulationMapper_run(void* arg);
 int prachF4N_RA(void* arg);
+int specialSubframeConfigurations_run(void* arg);
 
 int main() {
 
     {
-        test nRATest(&prachF4N_RA);
-        nRATest.run(nullptr);
+        test specialSubframeConfigurationsTest(&specialSubframeConfigurations_run);
+        specialSubframeConfigurationsTest.run(nullptr);
     }
+//    {
+//        test nRATest(&prachF4N_RA);
+//        nRATest.run(nullptr);
+//    }
 //    {
 //        test modulationTest(&modulationMapper_run);
 //        modulationTest.run(nullptr);
